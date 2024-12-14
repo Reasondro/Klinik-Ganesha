@@ -14,31 +14,38 @@ final GoRouter router = GoRouter(
   initialLocation: Routes.homeScreen,
   routes: [
     StatefulShellRoute.indexedStack(
-      builder: (context, state, navigationShell) =>
+      builder: (BuildContext context, GoRouterState state,
+              StatefulNavigationShell navigationShell) =>
           LayoutScaffold(navigationShell: navigationShell),
       branches: [
         StatefulShellBranch(
           routes: [
             GoRoute(
-              path: Routes.homeScreen,
-              builder: (context, state) => const HomeScreen(),
-            ),
+                path: Routes.homeScreen,
+                // builder: (context, state) => const HomeScreen(),
+                pageBuilder: (context, state) {
+                  return NoTransitionPage(child: HomeScreen());
+                }),
           ],
         ),
         StatefulShellBranch(
           routes: [
             GoRoute(
-              path: Routes.exploreScreen,
-              builder: (context, state) => const ExploreScreen(),
-            ),
+                path: Routes.exploreScreen,
+                // builder: (context, state) => const ExploreScreen(),
+                pageBuilder: (context, state) {
+                  return NoTransitionPage(child: ExploreScreen());
+                }),
           ],
         ),
         StatefulShellBranch(
           routes: [
             GoRoute(
-              path: Routes.profileScreen,
-              builder: (context, state) => const ProfileScreen(),
-            ),
+                path: Routes.profileScreen,
+                // builder: (context, state) => const ProfileScreen(),
+                pageBuilder: (context, state) {
+                  return NoTransitionPage(child: ProfileScreen());
+                }),
           ],
         )
       ],
