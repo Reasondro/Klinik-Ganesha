@@ -3,15 +3,15 @@ import 'package:go_router/go_router.dart';
 import 'package:klinik/models/destination.dart';
 import 'package:klinik/utils/go_router_location_extension.dart';
 
-class LayoutScaffold extends StatelessWidget {
-  const LayoutScaffold({super.key, required this.navigationShell});
+class LayoutScaffoldWithNav extends StatelessWidget {
+  const LayoutScaffoldWithNav({super.key, required this.child});
 
-  final StatefulNavigationShell navigationShell;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: navigationShell,
+      body: child,
       bottomNavigationBar: NavigationBar(
         destinations: destinations
             .map(
@@ -25,8 +25,8 @@ class LayoutScaffold extends StatelessWidget {
               ),
             )
             .toList(),
+        selectedIndex: _calculateIndex(context),
         // selectedIndex: navigationShell.currentIndex,
-        selectedIndex: navigationShell.currentIndex,
         // onDestinationSelected: navigationShell.goBranch,
         onDestinationSelected: (index) {
           _onItemTapped(context, index);
@@ -36,6 +36,14 @@ class LayoutScaffold extends StatelessWidget {
       ),
     );
   }
+}
+
+int _calculateIndex(BuildContext context) {
+  final location = GoRouter.of(context).location;
+  if (location.startsWith('/home')) return 0;
+  if (location.startsWith('/explore')) return 1;
+  if (location.startsWith('/profile')) return 2;
+  return 0;
 }
 
 void _onItemTapped(BuildContext context, int index) {
