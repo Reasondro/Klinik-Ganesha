@@ -20,7 +20,6 @@ class LayoutScaffoldWithNav extends StatelessWidget {
                 label: d.label,
                 selectedIcon: Icon(
                   d.icon,
-                  color: Colors.greenAccent,
                 ),
               ),
             )
@@ -32,7 +31,7 @@ class LayoutScaffoldWithNav extends StatelessWidget {
           _onItemTapped(context, index);
         },
 
-        indicatorColor: Colors.amber,
+        // indicatorColor: Colors.amber,
       ),
     );
   }

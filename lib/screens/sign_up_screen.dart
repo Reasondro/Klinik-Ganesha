@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:klinik/auth/auth_service.dart';
-
+import 'package:klinik/router/routes.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   late final TextEditingController _emailController;
   late final TextEditingController _passwordController;
 
@@ -34,7 +34,7 @@ class _SignInScreenState extends State<SignInScreen> {
     super.dispose();
   }
 
-  void signIn() async {
+  void signUp() async {
     final String email = _emailController.text;
     final String password = _passwordController.text;
 
@@ -68,7 +68,7 @@ class _SignInScreenState extends State<SignInScreen> {
       setState(() {
         _isAuthenticating = true;
       });
-      await authService.signInWithEmailPassword(
+      await authService.signUpWithEmailPassword(
           email: email, password: password);
     } on AuthException catch (e) {
       if (!mounted) return;
@@ -118,7 +118,7 @@ class _SignInScreenState extends State<SignInScreen> {
     setState(() {
       _isAuthenticating = false;
     });
-    // context.go(Routes.homeScreen);
+    context.go(Routes.homeScreen);
   }
 
   @override
@@ -221,12 +221,12 @@ class _SignInScreenState extends State<SignInScreen> {
               if (!_isAuthenticating)
                 ElevatedButton(
                   onPressed: () {
-                    signIn();
+                    signUp();
                   },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Theme.of(context).colorScheme.primary),
                   child: Text(
-                    "Sign in",
+                    "Sign Up",
                     style: const TextStyle(
                         color: Colors.black,
                         fontSize: 15,
@@ -240,13 +240,12 @@ class _SignInScreenState extends State<SignInScreen> {
                 TextButton(
                   onPressed: () {
                     FocusScope.of(context).unfocus();
-
                     _emailController.clear();
                     _passwordController.clear();
-                    context.go("/signUp");
+                    context.go("/signIn");
                   },
                   child: Text(
-                    "Create an account",
+                    "I already have an account",
                     style: const TextStyle(fontSize: 14),
                   ),
                 )

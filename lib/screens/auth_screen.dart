@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:klinik/auth/auth_service.dart';
+import 'package:klinik/router/routes.dart';
 
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:klinik/utils/snack_bar_extension.dart';
 
-class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+class AuthScreen extends StatefulWidget {
+  const AuthScreen({super.key});
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
+  State<AuthScreen> createState() => _AuthScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
+class _AuthScreenState extends State<AuthScreen> {
   late final TextEditingController _emailController;
   late final TextEditingController _passwordController;
 
   final AuthService authService = AuthService();
 
+  bool _isSignIn = true;
   bool _isAuthenticating = false;
 
   @override
@@ -40,28 +43,10 @@ class _SignInScreenState extends State<SignInScreen> {
 
     if (email.isEmpty || password.isEmpty) {
       ScaffoldMessenger.of(context).clearSnackBars();
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          padding: EdgeInsets.only(bottom: 4, top: 15, left: 14, right: 14),
-          content: Text(
-            'Please enter your email and password',
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.onError,
-              fontSize: 15,
-            ),
-            textAlign: TextAlign.left,
-          ),
-          backgroundColor: Theme.of(context).colorScheme.error,
-          dismissDirection: DismissDirection.horizontal,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(0),
-            ),
-          ),
-        ),
-      );
+      context.customShowErrorSnackBar('Please enter your email and password');
       return;
     }
+
     FocusScope.of(context).unfocus();
 
     try {
@@ -73,44 +58,11 @@ class _SignInScreenState extends State<SignInScreen> {
     } on AuthException catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).clearSnackBars();
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            e.message,
-            style: const TextStyle(
-                color: Colors.white,
-                // fontWeight: FontWeight.bold,
-                fontSize: 13),
-            textAlign: TextAlign.left,
-          ),
-          backgroundColor: Theme.of(context).colorScheme.error,
-          dismissDirection: DismissDirection.horizontal,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(7),
-            ),
-          ),
-        ),
-      );
+      context.customShowErrorSnackBar(e.message);
     } catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).clearSnackBars();
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            "Error: $e",
-            style: const TextStyle(color: Colors.white, fontSize: 13),
-            textAlign: TextAlign.left,
-          ),
-          backgroundColor: Theme.of(context).colorScheme.error,
-          dismissDirection: DismissDirection.horizontal,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(7),
-            ),
-          ),
-        ),
-      );
+      context.customShowErrorSnackBar("Error: $e");
     }
     if (!mounted) {
       return;
@@ -118,38 +70,82 @@ class _SignInScreenState extends State<SignInScreen> {
     setState(() {
       _isAuthenticating = false;
     });
-    // context.go(Routes.homeScreen);
+    context.go(Routes.homeScreen);
+  }
+
+  void signUp() async {
+    final String email = _emailController.text;
+    final String password = _passwordController.text;
+
+    if (email.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).clearSnackBars();
+      context.customShowErrorSnackBar('Please enter your email and password');
+      return;
+    }
+    FocusScope.of(context).unfocus();
+
+    try {
+      setState(() {
+        _isAuthenticating = true;
+      });
+      await authService.signUpWithEmailPassword(
+          email: email, password: password);
+    } on AuthException catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).clearSnackBars();
+      context.customShowErrorSnackBar(e.message);
+    } catch (e) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).clearSnackBars();
+      context.customShowErrorSnackBar("Error: $e");
+    }
+    if (!mounted) {
+      return;
+    }
+    setState(() {
+      _isAuthenticating = false;
+    });
+    context.go(Routes.homeScreen);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.only(right: 16, bottom: 220, left: 16),
+        // const EdgeInsets.only(top: 80, right: 16, bottom: 10, left: 16),
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                "Klinik Ganesha",
-                style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                    // color: Theme.of(context).colorScheme.primaryContainer,
-                    color: Theme.of(context).colorScheme.primary,
-                    fontSize: 50),
-                textAlign: TextAlign.center,
+              Column(
+                children: [
+                  Image.asset(
+                    "assets/images/logo3.png",
+                    height: 200,
+                  ),
+                  Text(
+                    "Klinik Ganesha",
+                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                        // color: Theme.of(context).colorScheme.primaryContainer,
+                        color: Theme.of(context).colorScheme.primary,
+                        fontSize: 35),
+                    textAlign: TextAlign.center,
+                  ),
+                  Padding(padding: EdgeInsets.only(bottom: 10))
+                ],
               ),
-              const SizedBox(
-                height: 20,
-              ),
+
               Container(
                 margin: const EdgeInsets.only(bottom: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Email",
+                      _isSignIn ? "Email" : "Your email",
                       style: const TextStyle(
-                          color: Color.fromARGB(255, 232, 235, 236),
+                          color: Colors.black87,
                           fontSize: 13,
                           fontWeight: FontWeight.bold),
                     ),
@@ -163,7 +159,8 @@ class _SignInScreenState extends State<SignInScreen> {
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12.0),
                           borderSide: const BorderSide(
-                              color: Color.fromARGB(255, 230, 248, 248)),
+                            color: Color.fromARGB(200, 0, 0, 0),
+                          ),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12.0),
@@ -172,7 +169,8 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                       ),
                       style: const TextStyle(
-                          color: Color.fromARGB(255, 216, 216, 216)),
+                        color: Colors.black87,
+                      ),
                     ),
                   ],
                 ),
@@ -183,9 +181,9 @@ class _SignInScreenState extends State<SignInScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Password",
+                      _isSignIn ? "Password" : "Your password",
                       style: const TextStyle(
-                          color: Color.fromARGB(255, 232, 235, 236),
+                          color: Colors.black87,
                           fontSize: 13,
                           fontWeight: FontWeight.bold),
                     ),
@@ -198,8 +196,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         floatingLabelBehavior: FloatingLabelBehavior.never,
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12.0),
-                          borderSide: const BorderSide(
-                              color: Color.fromARGB(255, 230, 248, 248)),
+                          borderSide: const BorderSide(color: Colors.black54),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12.0),
@@ -207,8 +204,8 @@ class _SignInScreenState extends State<SignInScreen> {
                               color: Theme.of(context).colorScheme.primary),
                         ),
                       ),
-                      style: const TextStyle(
-                          color: Color.fromARGB(255, 216, 216, 216)),
+                      style:
+                          const TextStyle(color: Color.fromARGB(200, 0, 0, 0)),
                       obscureText: true,
                     ),
                   ],
@@ -219,37 +216,48 @@ class _SignInScreenState extends State<SignInScreen> {
               ),
               if (_isAuthenticating) const CircularProgressIndicator(),
               if (!_isAuthenticating)
-                ElevatedButton(
-                  onPressed: () {
-                    signIn();
-                  },
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Theme.of(context).colorScheme.primary),
-                  child: Text(
-                    "Sign in",
-                    style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (_isSignIn) {
+                        signIn();
+                      } else {
+                        signUp();
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Theme.of(context).colorScheme.primary),
+                    child: Text(
+                      _isSignIn ? "Sign in" : "Sign up",
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.onPrimary,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600),
+                    ),
                   ),
                 ),
-              const SizedBox(
-                height: 10,
-              ),
+
               if (!_isAuthenticating)
                 TextButton(
                   onPressed: () {
                     FocusScope.of(context).unfocus();
-
                     _emailController.clear();
                     _passwordController.clear();
-                    context.go("/signUp");
+                    setState(() {
+                      _isSignIn = !_isSignIn;
+                    });
                   },
                   child: Text(
-                    "Create an account",
+                    _isSignIn
+                        ? "Create an account"
+                        : "I already have an account",
                     style: const TextStyle(fontSize: 14),
                   ),
-                )
+                ),
+              // SizedBox(
+              //   height: 150,
+              // )
             ]),
       ),
     );
