@@ -32,14 +32,7 @@ final ThemeData klinikTheme = ThemeData().copyWith(
     iconTheme: WidgetStateProperty.resolveWith((Set<WidgetState> states) =>
         states.contains(WidgetState.selected)
             ? (IconThemeData(color: klinikColorTheme.primary))
-            : (IconThemeData(color: klinikColorTheme.onSurface)))
-    //  WidgetStatePropertyAll(
-
-    //   IconThemeData(
-
-    //     color: Colors.red),
-    // )
-    ,
+            : (IconThemeData(color: klinikColorTheme.onSurface))),
     height: 65,
     backgroundColor: klinikColorTheme.surfaceContainer,
     // indicatorColor: klinikColorTheme.secondaryContainer,
@@ -73,7 +66,7 @@ void main() async {
       url: dotenv.env["SUPABASE_PROJECT_URL"]!);
   GoRouter router = RoutingService().router;
   Supabase.instance.client.auth.onAuthStateChange.listen((AuthState data) {
-    print("just refreshed");
+    // print("just refreshed");
     router.refresh();
   });
 

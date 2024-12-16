@@ -9,6 +9,7 @@ import 'package:klinik/screens/profile_screen.dart';
 import 'package:klinik/layouts/layout_scaffold_with_nav.dart';
 import 'package:klinik/router/routes.dart';
 import 'package:klinik/screens/results_screen.dart';
+import 'package:klinik/temp/note_screen.dart';
 
 import 'package:supabase_flutter/supabase_flutter.dart';
 // import 'package:klinik/utils/go_router_location_extension.dart';
@@ -54,6 +55,13 @@ class RoutingService {
             },
           ),
           GoRoute(
+              routes: [
+                GoRoute(
+                  parentNavigatorKey: _rootNavigatorKey,
+                  path: Routes.noteScreen,
+                  builder: (context, state) => NoteScreen(),
+                )
+              ],
               name: "Consult",
               path: Routes.consultScreen,
               pageBuilder: (context, state) {

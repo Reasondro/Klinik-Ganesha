@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
+import 'package:klinik/router/routes.dart';
 
 class ConsultScreen extends StatelessWidget {
   const ConsultScreen({super.key});
@@ -86,7 +87,9 @@ class ConsultScreen extends StatelessWidget {
           const SizedBox(height: 16),
           Center(
             child: ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () {
+                context.push(Routes.nestedNoteScreen);
+              },
               icon: const Icon(Icons.add),
               label: const Text('Buat Janji Konsultasi Baru'),
             ),
