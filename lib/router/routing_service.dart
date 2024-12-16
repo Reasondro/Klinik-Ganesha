@@ -22,17 +22,22 @@ class RoutingService {
     initialLocation: Routes.homeScreen,
     redirect: (BuildContext context, GoRouterState state) {
       final bool signedOut = Supabase.instance.client.auth.currentUser == null;
+      final bool signingIn = state.matchedLocation == "/auth";
       print(" Who is it: ${Supabase.instance.client.auth.currentUser}");
-      if (signedOut) {
-        return Routes.authScreen;
-      }
+      print("curr matched loc from routing_service: ${state.matchedLocation}");
       // if (!signedOut) {
       //   return Routes.homeScreen;
       // }
 
-      // if (signingIn) {
-      //   return Routes.homeScreen;
-      // }
+      if (signedOut) {
+        print("curr matched loc from signedOut cond: ${state.matchedLocation}");
+        return Routes.authScreen;
+      }
+      if (signingIn) {
+        print("curr matched loc from signingIn cond: ${state.matchedLocation}");
+        return Routes.homeScreen;
+      }
+      print("curr matched loc from nothing cond: ${state.matchedLocation}");
 
       return null;
     },

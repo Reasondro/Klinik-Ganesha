@@ -22,13 +22,29 @@ final ThemeData klinikTheme = ThemeData().copyWith(
     foregroundColor: klinikColorTheme.primary,
   ),
   navigationBarTheme: NavigationBarThemeData(
-    height: 60,
+    iconTheme: WidgetStateProperty.resolveWith((Set<WidgetState> states) =>
+        states.contains(WidgetState.selected)
+            ? (IconThemeData(color: klinikColorTheme.primary))
+            : (IconThemeData(color: klinikColorTheme.onSurface)))
+    //  WidgetStatePropertyAll(
+
+    //   IconThemeData(
+
+    //     color: Colors.red),
+    // )
+    ,
+    height: 65,
     backgroundColor: klinikColorTheme.surfaceContainer,
+    // indicatorColor: klinikColorTheme.secondaryContainer,
+    // indicatorColor: klinikColorTheme.inversePrimary,
     indicatorColor: klinikColorTheme.secondaryContainer,
-    // indicatorShape: const RoundedRectangleBorder(
-    //   borderRadius: BorderRadius.all(Radius.circular(10)),
-    // ),
-    indicatorShape: const CircleBorder(),
+    // indicatorColor: Color.fromARGB(0, 0, 0, 0),
+
+    indicatorShape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(Radius.circular(15)),
+    ),
+    // indicatorShape: const CircleBorder(),
+    // indicatorShape: const BeveledRectangleBorder(),
     labelTextStyle: WidgetStatePropertyAll(
       TextStyle(
         // color: klinikColorTheme.onSurface,

@@ -70,7 +70,7 @@ class _AuthScreenState extends State<AuthScreen> {
     setState(() {
       _isAuthenticating = false;
     });
-    context.go(Routes.homeScreen);
+    // context.go(Routes.homeScreen);
   }
 
   void signUp() async {
@@ -105,7 +105,7 @@ class _AuthScreenState extends State<AuthScreen> {
     setState(() {
       _isAuthenticating = false;
     });
-    context.go(Routes.homeScreen);
+    // context.go(Routes.homeScreen);
   }
 
   @override
@@ -113,7 +113,7 @@ class _AuthScreenState extends State<AuthScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Padding(
-        padding: const EdgeInsets.only(right: 16, bottom: 220, left: 16),
+        padding: const EdgeInsets.only(right: 16, bottom: 200, left: 16),
         // const EdgeInsets.only(top: 80, right: 16, bottom: 10, left: 16),
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -122,9 +122,10 @@ class _AuthScreenState extends State<AuthScreen> {
               Column(
                 children: [
                   Image.asset(
-                    "assets/images/logo3.png",
-                    height: 200,
+                    "assets/images/logo4.png",
+                    height: 190,
                   ),
+                  Padding(padding: EdgeInsets.only(bottom: 10)),
                   Text(
                     "Klinik Ganesha",
                     style: Theme.of(context).textTheme.titleLarge!.copyWith(
@@ -133,7 +134,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         fontSize: 35),
                     textAlign: TextAlign.center,
                   ),
-                  Padding(padding: EdgeInsets.only(bottom: 10))
+                  Padding(padding: EdgeInsets.only(bottom: 15))
                 ],
               ),
 
@@ -211,9 +212,9 @@ class _AuthScreenState extends State<AuthScreen> {
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 12,
-              ),
+              // const SizedBox(
+              //   height: 4,
+              // ),
               if (_isAuthenticating) const CircularProgressIndicator(),
               if (!_isAuthenticating)
                 SizedBox(
