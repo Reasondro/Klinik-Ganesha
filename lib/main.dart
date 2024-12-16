@@ -14,7 +14,14 @@ final ThemeData klinikTheme = ThemeData().copyWith(
   textTheme: GoogleFonts.dmSansTextTheme().copyWith(
     titleLarge:
         GoogleFonts.comfortaa(fontWeight: FontWeight.bold, fontSize: 35),
-    titleMedium: GoogleFonts.dmSans(fontWeight: FontWeight.w400, fontSize: 30),
+    titleMedium: GoogleFonts.dmSans(
+        fontWeight: FontWeight.w600,
+        fontSize: 25,
+        color: klinikColorTheme.secondary),
+    titleSmall: GoogleFonts.dmSans(
+        fontWeight: FontWeight.w600,
+        fontSize: 20,
+        color: klinikColorTheme.primary),
     labelSmall: GoogleFonts.dmSans(fontWeight: FontWeight.w400, fontSize: 15),
   ),
   appBarTheme: AppBarTheme(
