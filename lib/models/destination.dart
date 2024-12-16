@@ -9,6 +9,9 @@ class Destination {
 
 const destinations = [
   Destination(label: "Home", icon: Icons.home),
-  Destination(label: "Explore", icon: Icons.search),
-  Destination(label: "Profile", icon: Icons.person)
+  // Destination(label: "Explore", icon: Icons.search),
+  Destination(label: "Consult", icon: Icons.badge),
+  Destination(label: "Lab", icon: Icons.vaccines),
+  Destination(label: "Results", icon: Icons.assignment),
+  Destination(label: "Profile", icon: Icons.person),
 ];

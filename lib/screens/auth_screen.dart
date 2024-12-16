@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:klinik/auth/auth_service.dart';
-import 'package:klinik/router/routes.dart';
 
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:klinik/utils/snack_bar_extension.dart';
