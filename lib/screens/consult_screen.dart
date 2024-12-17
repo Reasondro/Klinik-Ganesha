@@ -1,10 +1,19 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
+import 'package:klinik/database/feeds_database.dart';
+import 'package:klinik/models/feed.dart';
 import 'package:klinik/router/routes.dart';
+import 'package:uuid/uuid.dart';
 
-class ConsultScreen extends StatelessWidget {
+class ConsultScreen extends StatefulWidget {
   const ConsultScreen({super.key});
 
+  @override
+  State<ConsultScreen> createState() => _ConsultScreenState();
+}
+
+class _ConsultScreenState extends State<ConsultScreen> {
+  final FeedsDatabase _feedsDatabase = FeedsDatabase();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -88,7 +97,14 @@ class ConsultScreen extends StatelessWidget {
           Center(
             child: ElevatedButton.icon(
               onPressed: () {
-                context.push(Routes.nestedNoteScreen);
+                // context.push(Routes.nestedNoteScreen);
+                Feed newFeed = Feed(
+                    userId: "c267e2d3-f6e4-4277-b5d8-f4ff9fdaed01",
+                    category: "consult",
+                    doctorId: Uuid().v4(),
+                    doctorName: "dr Satria",
+                    desc: "Ini orang sakit jantung");
+                _feedsDatabase.createFeedConsult(newFeed);
               },
               icon: const Icon(Icons.add),
               label: const Text('Buat Janji Konsultasi Baru'),
