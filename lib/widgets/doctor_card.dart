@@ -6,12 +6,11 @@ import 'package:klinik/database/feeds_consult_database.dart';
 import 'package:uuid/uuid.dart';
 
 class DoctorCard extends StatelessWidget {
-  const DoctorCard({
-    super.key,
-    required this.doctor,
-  });
+  const DoctorCard(
+      {super.key, required this.doctor, required this.onMakeAppointment});
 
   final Doctor doctor;
+  final VoidCallback onMakeAppointment;
 
   @override
   Widget build(BuildContext context) {
@@ -104,25 +103,27 @@ class DoctorCard extends StatelessWidget {
                       Theme.of(context).colorScheme.secondary,
                     ),
                   ),
-                  onPressed: () {
-                    final userId = AuthService().getCurrentUserId();
-                    final category = "Konsultasi Offline";
-                    final doctorId = doctor.id;
-                    final doctorName = doctor.nameTitle;
-                    final consultTime = doctor.timeStart;
-                    final consultDay = doctor.dayStart;
-                    final desc = "Medical checkup: ${doctor.specialize}";
+                  onPressed: onMakeAppointment
+                  // () {
+                  //   final userId = AuthService().getCurrentUserId();
+                  //   final category = "Konsultasi Offline";
+                  //   final doctorId = doctor.id;
+                  //   final doctorName = doctor.nameTitle;
+                  //   final consultTime = doctor.timeStart;
+                  //   final consultDay = doctor.dayStart;
+                  //   final desc = "Medical checkup: ${doctor.specialize}";
 
-                    final newFeedConsult = FeedConsult(
-                        userId: userId!,
-                        category: category,
-                        doctorId: doctorId,
-                        doctorName: doctorName,
-                        desc: desc,
-                        consultTime: consultTime,
-                        consultDay: consultDay);
-                    makeAppointment(newFeedConsult);
-                  },
+                  //   final newFeedConsult = FeedConsult(
+                  //       userId: userId!,
+                  //       category: category,
+                  //       doctorId: doctorId,
+                  //       doctorName: doctorName,
+                  //       desc: desc,
+                  //       consultTime: consultTime,
+                  //       consultDay: consultDay);
+                  //   makeAppointment(newFeedConsult);
+                  // }
+                  ,
                   child: Text(
                     'Buat Janji',
                     style: TextStyle(

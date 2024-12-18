@@ -13,9 +13,7 @@ class FeedConsult {
     required this.desc,
     required this.consultTime,
     required this.consultDay,
-    // DateTime createdAt,
   }) : id = id ?? uuid.v4();
-  // createdAt = createdAt ?? DateTime.now();
 
   final String id;
   final String? createdAt;
