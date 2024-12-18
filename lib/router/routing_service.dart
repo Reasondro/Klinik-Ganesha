@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:klinik/screens/auth_screen.dart';
 import 'package:klinik/screens/consult_screen.dart';
+import 'package:klinik/screens/doctors_screen.dart';
 
 import 'package:klinik/screens/home_screen.dart';
 import 'package:klinik/screens/lab_screen.dart';
@@ -55,18 +56,22 @@ class RoutingService {
             },
           ),
           GoRoute(
-              routes: [
-                GoRoute(
-                  parentNavigatorKey: _rootNavigatorKey,
-                  path: Routes.noteScreen,
-                  builder: (context, state) => NoteScreen(),
-                )
-              ],
-              name: "Consult",
-              path: Routes.consultScreen,
-              pageBuilder: (context, state) {
-                return NoTransitionPage(child: ConsultScreen());
-              }),
+            name: "Consult",
+            path: Routes.consultScreen,
+            pageBuilder: (context, state) {
+              return NoTransitionPage(child: ConsultScreen());
+            },
+            routes: [
+              GoRoute(
+                // parentNavigatorKey: _rootNavigatorKey,
+                // path: Routes.noteScreen,
+                // builder: (context, state) => NoteScreen(),
+                parentNavigatorKey: _rootNavigatorKey,
+                path: Routes.doctorsScreen,
+                builder: (context, state) => DoctorsScreen(),
+              )
+            ],
+          ),
           GoRoute(
               name: "Lab",
               path: Routes.labScreen,

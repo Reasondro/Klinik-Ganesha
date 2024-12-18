@@ -12,6 +12,9 @@ class Routes {
   static const String noteScreen = "note";
   static const String nestedNoteScreen = "/consult/note";
 
+  static const String doctorsScreen = "doctor";
+  static const String nestedDoctorsScreen = "/consult/doctor";
+
   // static const String signInScreen = "/signIn";
   // static const String signUpScreen = "/signUp";
 }
