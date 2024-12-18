@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:klinik/database/doctors_database.dart';
+import 'package:klinik/models/feed_consult.dart';
 
 import 'package:klinik/widgets/doctor_card.dart';
 
@@ -32,7 +33,9 @@ class _DoctorsScreenState extends State<DoctorsScreen> {
                     itemCount: doctors.length,
                     itemBuilder: (context, index) {
                       final doctor = doctors[index];
-                      return DoctorCard(doctor: doctor);
+                      return DoctorCard(
+                        doctor: doctor,
+                      );
                     });
               })),
     );

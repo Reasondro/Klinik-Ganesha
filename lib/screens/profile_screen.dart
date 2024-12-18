@@ -31,12 +31,10 @@ class ProfileScreen extends StatelessWidget {
         children: [
           const SizedBox(height: 8),
 
-          // Foto Profil
           Center(
             child: CircleAvatar(
               radius: 50,
-              backgroundImage: AssetImage('assets/images/default_profile.png'),
-              // bisa diganti sesuai sumber foto profil user
+              // backgroundImage: AssetImage('assets/images/default_profile.png'),
             ),
           ),
           const SizedBox(height: 8),

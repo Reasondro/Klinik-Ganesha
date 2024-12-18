@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:klinik/auth/auth_service.dart';
 import 'package:klinik/models/doctor.dart';
+import 'package:klinik/models/feed_consult.dart';
+import 'package:klinik/database/feeds_consult_database.dart';
+import 'package:uuid/uuid.dart';
 
 class DoctorCard extends StatelessWidget {
   const DoctorCard({
     super.key,
     required this.doctor,
-    this.onMakeAppointment,
   });
 
   final Doctor doctor;
-  final VoidCallback? onMakeAppointment;
 
   @override
   Widget build(BuildContext context) {
+    final feedsConsultDatabase = FeedsConsultDatabase();
+
+    void makeAppointment(FeedConsult newFeedConsult) async {
+      feedsConsultDatabase.createFeedConsult(newFeedConsult);
+    }
+
     return Card(
       color: Theme.of(context).colorScheme.surfaceContainer,
       shape: RoundedRectangleBorder(
@@ -96,7 +104,25 @@ class DoctorCard extends StatelessWidget {
                       Theme.of(context).colorScheme.secondary,
                     ),
                   ),
-                  onPressed: onMakeAppointment,
+                  onPressed: () {
+                    final userId = AuthService().getCurrentUserId();
+                    final category = "Konsultasi Offline";
+                    final doctorId = doctor.id;
+                    final doctorName = doctor.nameTitle;
+                    final consultTime = doctor.timeStart;
+                    final consultDay = doctor.dayStart;
+                    final desc = "Medical checkup: ${doctor.specialize}";
+
+                    final newFeedConsult = FeedConsult(
+                        userId: userId!,
+                        category: category,
+                        doctorId: doctorId,
+                        doctorName: doctorName,
+                        desc: desc,
+                        consultTime: consultTime,
+                        consultDay: consultDay);
+                    makeAppointment(newFeedConsult);
+                  },
                   child: Text(
                     'Buat Janji',
                     style: TextStyle(
