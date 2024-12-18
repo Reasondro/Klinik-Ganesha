@@ -9,7 +9,6 @@ class DoctorCard extends StatelessWidget {
   });
 
   final Doctor doctor;
-
   final VoidCallback? onMakeAppointment;
 
   @override
@@ -25,18 +24,39 @@ class DoctorCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              doctor.nameTitle,
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CircleAvatar(
+                  radius: 30,
+                  backgroundImage:
+                      const AssetImage('assets/images/doctor_placeholder.png'),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        doctor.nameTitle,
+                        style:
+                            Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        "Spesialisasi: ${doctor.specialize}",
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                    ],
                   ),
-            ),
-            const SizedBox(height: 4),
-            Text(
-              "Spesialisasi: ${doctor.specialize}",
-              style: Theme.of(context).textTheme.bodyMedium,
+                ),
+              ],
             ),
             const SizedBox(height: 8),
+
+            // Informasi hari
             Row(
               children: [
                 const Icon(Icons.calendar_today, size: 18),
@@ -50,6 +70,8 @@ class DoctorCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 4),
+
+            // Informasi jam
             Row(
               children: [
                 const Icon(Icons.access_time, size: 18),
@@ -63,19 +85,24 @@ class DoctorCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 12),
+
+            // Tombol Buat Janji
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 ElevatedButton(
                   style: ButtonStyle(
-                      backgroundColor: WidgetStatePropertyAll(
-                          Theme.of(context).colorScheme.secondary)),
+                    backgroundColor: WidgetStateProperty.all(
+                      Theme.of(context).colorScheme.secondary,
+                    ),
+                  ),
                   onPressed: onMakeAppointment,
                   child: Text(
                     'Buat Janji',
                     style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.onSecondary),
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.onSecondary,
+                    ),
                   ),
                 ),
               ],

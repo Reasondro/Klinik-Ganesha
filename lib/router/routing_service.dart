@@ -26,18 +26,22 @@ class RoutingService {
       final bool signedOut = Supabase.instance.client.auth.currentUser == null;
       final bool signingIn = state.matchedLocation == "/auth";
 
+      // ? testing ⬇️⬇️⬇️⬇️⬇️
       // print(" Who is it: ${Supabase.instance.client.auth.currentUser}");
       // print("curr matched loc from routing_service: ${state.matchedLocation}");
 
       if (signedOut) {
+        // ? testing ⬇️⬇️⬇️⬇️⬇️
         // print("curr matched loc from signedOut cond: ${state.matchedLocation}");
         return Routes.authScreen;
       }
 
       if (signingIn) {
+        // ? testing ⬇️⬇️⬇️⬇️⬇️
         // print("curr matched loc from signingIn cond: ${state.matchedLocation}");
         return Routes.homeScreen;
       }
+      // ? testing ⬇️⬇️⬇️⬇️⬇️
       // print("curr matched loc from nothing cond: ${state.matchedLocation}");
 
       return null;
@@ -84,12 +88,6 @@ class RoutingService {
               pageBuilder: (context, state) {
                 return NoTransitionPage(child: ResultsScreen());
               }),
-          // GoRoute(
-          //     name: "Explore",
-          //     path: Routes.exploreScreen,
-          //     pageBuilder: (context, state) {
-          //       return NoTransitionPage(child: ExploreScreen());
-          //     }),
           GoRoute(
               name: "Profile",
               path: Routes.profileScreen,
@@ -98,16 +96,6 @@ class RoutingService {
               }),
         ],
       ),
-      // GoRoute(
-      //     path: Routes.signInScreen,
-      //     pageBuilder: (context, state) {
-      //       return NoTransitionPage(child: SignInScreen());
-      //     }),
-      // GoRoute(
-      //     path: Routes.signUpScreen,
-      //     pageBuilder: (context, state) {
-      //       return NoTransitionPage(child: SignUpScreen());
-      //     }),
       GoRoute(
           path: Routes.authScreen,
           pageBuilder: (context, state) {

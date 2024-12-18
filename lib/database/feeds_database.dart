@@ -16,7 +16,6 @@ class FeedsDatabase {
     "id"
   ]).map((data) => data.map((feedMap) => Feed.fromMap(feedMap)).toList());
 
-  // TODO implement update
   // Future updateFeed(Feed oldFeed)
 
   Future deleteFeed(Feed feed) async {

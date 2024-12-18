@@ -12,8 +12,7 @@ class DoctorsDatabase {
     "id"
   ]).map((data) => data.map((doctorMap) => Doctor.fromMap(doctorMap)).toList());
 
-  // TODO implement update
-//? update
+  // TODO IMPELMENT UPDATE!!!
   // Future updateDoctor(Doctor oldDoctor, String newContent) async {
   //   await database.update({"content": newContent}).eq("id", oldDoctor.id!);
   // }
