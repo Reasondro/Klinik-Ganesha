@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:klinik/auth/auth_service.dart';
 import 'package:klinik/database/feeds_consult_database.dart';
-import 'package:klinik/widgets/feed_consult_card.dart';
+import 'package:klinik/models/feed.dart';
+import 'package:klinik/models/feed_consult.dart';
+import 'package:klinik/widgets/feed_consult_item.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,118 +14,71 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // TODO natni change with username
-  // TODO pastiin hrus punya display name dulu
   final String? username =
-      AuthService.supabase.auth.currentUser!.email ?? "Username";
+      AuthService.supabase.auth.currentUser?.email ?? "Username";
 
   final feedsConsultDatabase = FeedsConsultDatabase();
+
+  void cancelAppointment(FeedConsult feedConsult) {
+    feedsConsultDatabase.deleteFeedConsult(feedConsult);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.only(top: 5, right: 16.0, left: 16.0),
-        child: StreamBuilder(
-            stream: feedsConsultDatabase.stream,
-            builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-              final feedsConsult = snapshot.data!;
-              return ListView.builder(
+      padding: const EdgeInsets.only(top: 0, right: 16.0, left: 16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Flexible(
+            child: StreamBuilder(
+              stream: feedsConsultDatabase.stream,
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                final List<FeedConsult> feedsConsult = snapshot.data!;
+                if (feedsConsult.isEmpty) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/images/no_appointment2.png',
+                        width: 400,
+                        fit: BoxFit.contain,
+                      ),
+                      Text(
+                        "Kosong nih, jadwal Anda.\nYuk, buat janji sekarang!",
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium
+                            ?.copyWith(fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  );
+                }
+
+                return ListView.builder(
                   itemCount: feedsConsult.length,
                   itemBuilder: (context, index) {
                     final feedConsult = feedsConsult[index];
-                    return FeedConsultCard(feedConsult: feedConsult);
-                  });
-            })
-        // ListView(
-        //   children: [
-        //     Text(
-        //       "Selamat Sore, $username ",
-        //       style: Theme.of(context).textTheme.titleMedium,
-        //       textAlign: TextAlign.center,
-        //     ),
-        //     const SizedBox(height: 8),
-        //     Card(
-        //       shape: RoundedRectangleBorder(
-        //         borderRadius: BorderRadius.circular(12),
-        //       ),
-        //       child: ListTile(
-        //         leading: const Icon(Icons.medical_services),
-        //         title: const Text('Dr. Spesialis Jantung'),
-        //         subtitle: const Text('Senin, 20 Des 2024 - 10:00 AM'),
-        //         trailing: ElevatedButton(
-        //           onPressed: () {},
-        //           child: const Text('Lihat Detail'),
-        //         ),
-        //       ),
-        //     ),
-        //     const SizedBox(height: 8),
-        //     Card(
-        //       shape: RoundedRectangleBorder(
-        //         borderRadius: BorderRadius.circular(12),
-        //       ),
-        //       child: ListTile(
-        //         leading: const Icon(Icons.biotech),
-        //         title: const Text('Tes Darah Lengkap'),
-        //         subtitle: const Text('Rabu, 22 Des 2024 - 08:00 AM'),
-        //         trailing: ElevatedButton(
-        //           onPressed: () {},
-        //           child: const Text('Lihat Detail'),
-        //         ),
-        //       ),
-        //     ),
-        //     const SizedBox(height: 8),
-        //     Card(
-        //       shape: RoundedRectangleBorder(
-        //         borderRadius: BorderRadius.circular(12),
-        //       ),
-        //       child: ListTile(
-        //         leading: const Icon(Icons.description),
-        //         title: const Text('Hasil Konsultasi Terbaru'),
-        //         subtitle: const Text('Tinjau hasil dan saran dari dr.ganteng123'),
-        //         trailing: ElevatedButton(
-        //           onPressed: () {},
-        //           child: const Text('Lihat'),
-        //         ),
-        //       ),
-        //     ),
-        //     const SizedBox(height: 8),
-        //     Card(
-        //       shape: RoundedRectangleBorder(
-        //         borderRadius: BorderRadius.circular(12),
-        //       ),
-        //       child: ListTile(
-        //         leading: const Icon(Icons.analytics),
-        //         title: const Text('Hasil Lab Telah Tersedia'),
-        //         subtitle: const Text('Cek hasil uji lab jantung lengkap Anda'),
-        //         trailing: ElevatedButton(
-        //           onPressed: () {},
-        //           child: const Text('Lihat'),
-        //         ),
-        //       ),
-        //     ),
-        //     StreamBuilder(
-        //         stream: feedsConsultDatabase.stream,
-        //         builder: (context, snapshot) {
-        //           if (!snapshot.hasData) {
-        //             return const Center(
-        //               child: CircularProgressIndicator(),
-        //             );
-        //           }
-        //           final feedsConsult = snapshot.data!;
-        //           return ListView.builder(
-        //               itemCount: feedsConsult.length,
-        //               itemBuilder: (context, index) {
-        //                 final feedConsult = feedsConsult[index];
-        //                 return FeedConsultCard(feedConsult: feedConsult);
-        //               });
-        //         })
-        //   ],
-        // ),
-        );
+                    return FeedConsultItem(
+                      feedConsult: feedConsult,
+                      onCancel: () {
+                        cancelAppointment(feedConsult);
+                      },
+                    );
+                  },
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

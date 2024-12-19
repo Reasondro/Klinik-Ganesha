@@ -10,7 +10,7 @@ import 'package:klinik/screens/profile_screen.dart';
 import 'package:klinik/layouts/layout_scaffold_with_nav.dart';
 import 'package:klinik/router/routes.dart';
 import 'package:klinik/screens/results_screen.dart';
-import 'package:klinik/temp/note_screen.dart';
+// import 'package:klinik/temp/note_screen.dart';
 
 import 'package:supabase_flutter/supabase_flutter.dart';
 // import 'package:klinik/utils/go_router_location_extension.dart';
@@ -93,6 +93,7 @@ class RoutingService {
               path: Routes.profileScreen,
               pageBuilder: (context, state) {
                 return NoTransitionPage(child: ProfileScreen());
+                // return NoTransitionPage(child: NoteScreen());
               }),
         ],
       ),

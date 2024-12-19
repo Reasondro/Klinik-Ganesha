@@ -1,36 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:klinik/auth/auth_service.dart';
 
-// class ProfileScreen extends StatelessWidget {
-//   const ProfileScreen({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Center(
-//       child: ElevatedButton(
-//           onPressed: () {
-//             AuthService().signOut();
-//           },
-//           child: Icon(Icons.exit_to_app)),
-//     );
-//   }
-// }
-
-import 'package:flutter/material.dart';
-
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final String? userEmail =
+    final String userEmail =
         AuthService.supabase.auth.currentUser!.email ?? "User Email";
     return Padding(
       padding: const EdgeInsets.only(top: 5, right: 16.0, left: 16.0),
       child: ListView(
         children: [
           const SizedBox(height: 8),
-
           Center(
             child: CircleAvatar(
               radius: 50,
@@ -38,26 +20,23 @@ class ProfileScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-
-          // Nama pengguna
-          Center(
-            child: Text(
-              'Alessandro Jusack H.',
-              style: Theme.of(context).textTheme.titleMedium,
-              textAlign: TextAlign.center,
-            ),
-          ),
+          // Center(
+          //   child: Text(
+          //     'Alessandro Jusack H.',
+          //     style: Theme.of(context).textTheme.titleMedium,
+          //     textAlign: TextAlign.center,
+          //   ),
+          // ),
           const SizedBox(height: 4),
-
           Center(
             child: Text(
-              "Email: $userEmail",
-              style: Theme.of(context).textTheme.bodyMedium,
+              userEmail,
+              // style: Theme.of(context).textTheme.bodyMedium,
+              style: Theme.of(context).textTheme.titleSmall,
               textAlign: TextAlign.center,
             ),
           ),
           const SizedBox(height: 16),
-
           Center(
             child: ElevatedButton(
               onPressed: () {},
@@ -65,17 +44,14 @@ class ProfileScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-
           Divider(),
           const SizedBox(height: 8),
-
           Text(
             "Pengaturan & Informasi",
             style: Theme.of(context).textTheme.titleMedium,
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 16),
-
           Card(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
@@ -89,7 +65,6 @@ class ProfileScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-
           Card(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
@@ -103,7 +78,6 @@ class ProfileScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 8),
-
           Card(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
@@ -117,7 +91,6 @@ class ProfileScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-
           Center(
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(

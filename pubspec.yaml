@@ -70,6 +70,8 @@ flutter:
     # - assets/images/logo3.png
     - assets/images/logo4.png
     - assets/images/doctor_placeholder.png
+    - assets/images/no_appointment.png
+    - assets/images/no_appointment2.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

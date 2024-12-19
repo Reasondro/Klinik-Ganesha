@@ -26,53 +26,69 @@ class _NoteScreenState extends State<NoteScreen> {
     super.dispose();
   }
 
+  void addNewNote() {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: const Text("New Note"),
+              content: TextField(
+                controller: _noteController,
+              ),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      context.pop();
+                      _noteController.clear();
+                    },
+                    child: const Text("Cancel")),
+                TextButton(
+                    onPressed: () {
+                      final Note newNote = Note(
+                        content: _noteController.text,
+                      );
+                      _notesDatabase.createNote(newNote);
+                      context.pop();
+                      _noteController.clear();
+                    },
+                    child: const Text("Save"))
+              ],
+            ));
+  }
+
+  void deleteNote(Note note) {
+    _notesDatabase.deleteNote(note);
+  }
+
   @override
   Widget build(BuildContext context) {
-    void addNewNote() {
-      showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-                title: const Text("New Note"),
-                content: TextField(
-                  controller: _noteController,
-                ),
-                actions: [
-                  TextButton(
-                      onPressed: () {
-                        context.pop();
-                        _noteController.clear();
-                      },
-                      child: const Text("Cancel")),
-                  TextButton(
-                      onPressed: () {
-                        final Note newNote = Note(
-                          content: _noteController.text,
-                        );
-                        _notesDatabase.createNote(newNote);
-                        context.pop();
-                        _noteController.clear();
-                      },
-                      child: const Text("Save"))
-                ],
-              ));
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: Text("Notes"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 5, right: 16.0, left: 16.0),
-        child: ListView(
-          children: [
-            Text(
-              "Your Notes",
-              style: Theme.of(context).textTheme.titleMedium,
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
-      ),
+      body: StreamBuilder(
+          stream: _notesDatabase.stream,
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            final notes = snapshot.data!;
+
+            return ListView.builder(
+                itemCount: notes.length,
+                itemBuilder: (context, index) {
+                  final note = notes[index];
+                  return ListTile(
+                    title: Text(note.content),
+                    trailing: IconButton(
+                        onPressed: () {
+                          deleteNote(note);
+                        },
+                        icon: Icon(Icons.delete)),
+                  );
+                });
+          }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           addNewNote();
