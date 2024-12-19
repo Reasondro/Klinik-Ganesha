@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+// import 'package:go_router/go_router.dart';
 import 'package:klinik/auth/auth_service.dart';
 import 'package:klinik/database/feeds_consult_database.dart';
-import 'package:klinik/models/feed.dart';
+// import 'package:klinik/models/feed.dart';
 import 'package:klinik/models/feed_consult.dart';
 import 'package:klinik/widgets/feed_consult_item.dart';
 
@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 0, right: 16.0, left: 16.0),
+      padding: const EdgeInsets.only(top: 0, right: 13, left: 13),
       child: StreamBuilder(
         stream: feedsConsultDatabase.stream,
         builder: (context, snapshot) {

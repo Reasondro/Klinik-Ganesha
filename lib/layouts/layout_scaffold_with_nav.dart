@@ -5,9 +5,10 @@ import 'package:klinik/router/routes.dart';
 import 'package:klinik/utils/go_router_location_extension.dart';
 
 class LayoutScaffoldWithNav extends StatelessWidget {
-  const LayoutScaffoldWithNav({super.key, required this.child});
+  const LayoutScaffoldWithNav({super.key, required this.navigationShell});
 
-  final Widget child;
+  // final Widget child;
+  final StatefulNavigationShell navigationShell;
 
   @override
   Widget build(BuildContext context) {
@@ -42,13 +43,13 @@ class LayoutScaffoldWithNav extends StatelessWidget {
         break;
       default:
         appBar = AppBar(
-          title: Text("Sex"),
+          title: Text(""),
         );
     }
 
     return Scaffold(
       appBar: appBar,
-      body: child,
+      body: navigationShell,
       bottomNavigationBar: NavigationBar(
         destinations: destinations
             .map(
@@ -61,12 +62,12 @@ class LayoutScaffoldWithNav extends StatelessWidget {
               ),
             )
             .toList(),
-        selectedIndex: _calculateIndex(context),
-        // selectedIndex: navigationShell.currentIndex,
-        // onDestinationSelected: navigationShell.goBranch,
-        onDestinationSelected: (index) {
-          _onItemTapped(context, index);
-        },
+        // selectedIndex: _calculateIndex(context),
+        selectedIndex: navigationShell.currentIndex,
+        onDestinationSelected: navigationShell.goBranch,
+        // onDestinationSelected: (index) {
+        //   _onItemTapped(context, index);
+        // },
 
         // indicatorColor: Colors.amber,
       ),
@@ -74,34 +75,34 @@ class LayoutScaffoldWithNav extends StatelessWidget {
   }
 }
 
-int _calculateIndex(BuildContext context) {
-  final location = GoRouter.of(context).location;
-  if (location.startsWith(Routes.homeScreen)) return 0;
-  if (location.startsWith(Routes.consultScreen)) return 1;
-  if (location.startsWith(Routes.labScreen)) return 2;
-  if (location.startsWith(Routes.resultsScreen)) return 3;
-  if (location.startsWith(Routes.profileScreen)) return 4;
+// int _calculateIndex(BuildContext context) {
+//   final location = GoRouter.of(context).location;
+//   if (location.startsWith(Routes.homeScreen)) return 0;
+//   if (location.startsWith(Routes.consultScreen)) return 1;
+//   if (location.startsWith(Routes.labScreen)) return 2;
+//   if (location.startsWith(Routes.resultsScreen)) return 3;
+//   if (location.startsWith(Routes.profileScreen)) return 4;
 
-  return 0;
-}
+//   return 0;
+// }
 
-void _onItemTapped(BuildContext context, int index) {
-  switch (index) {
-    case 0:
-      context.push(Routes.homeScreen);
-      // print('Current route: ${GoRouter.of(context).location}');
-      break;
-    case 1:
-      context.push(Routes.consultScreen);
-      break;
-    case 2:
-      context.push(Routes.labScreen);
-      break;
-    case 3:
-      context.push(Routes.resultsScreen);
-      break;
-    case 4:
-      context.push(Routes.profileScreen);
-      break;
-  }
-}
+// void _onItemTapped(BuildContext context, int index) {
+//   switch (index) {
+//     case 0:
+//       context.push(Routes.homeScreen);
+//       // print('Current route: ${GoRouter.of(context).location}');
+//       break;
+//     case 1:
+//       context.push(Routes.consultScreen);
+//       break;
+//     case 2:
+//       context.push(Routes.labScreen);
+//       break;
+//     case 3:
+//       context.push(Routes.resultsScreen);
+//       break;
+//     case 4:
+//       context.push(Routes.profileScreen);
+//       break;
+//   }
+// }

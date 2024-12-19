@@ -22,10 +22,9 @@ class FeedConsultItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: Colors.black38,
-              blurRadius: 6,
-              offset: const Offset(0, 1),
-            ),
+                color: Colors.black38,
+                blurRadius: 6,
+                offset: const Offset(0, 1)),
           ],
         ),
         child: Column(

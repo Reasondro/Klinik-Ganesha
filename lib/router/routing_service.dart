@@ -47,54 +47,66 @@ class RoutingService {
       return null;
     },
     routes: [
-      ShellRoute(
-        builder: (BuildContext context, GoRouterState state, Widget child) =>
-            LayoutScaffoldWithNav(child: child),
-        routes: [
-          GoRoute(
-            name: "Home",
-            path: Routes.homeScreen,
-            // builder: (context, state) => const HomeScreen(),
-            pageBuilder: (context, state) {
-              return NoTransitionPage(child: HomeScreen());
-            },
-          ),
-          GoRoute(
-            name: "Consult",
-            path: Routes.consultScreen,
-            pageBuilder: (context, state) {
-              return NoTransitionPage(child: ConsultScreen());
-            },
+      StatefulShellRoute.indexedStack(
+        builder: (BuildContext context, GoRouterState state,
+                StatefulNavigationShell navigationShell) =>
+            LayoutScaffoldWithNav(
+          navigationShell: navigationShell,
+        ),
+        branches: [
+          StatefulShellBranch(
             routes: [
               GoRoute(
-                // parentNavigatorKey: _rootNavigatorKey,
-                // path: Routes.noteScreen,
-                // builder: (context, state) => NoteScreen(),
-                parentNavigatorKey: _rootNavigatorKey,
-                path: Routes.doctorsScreen,
-                builder: (context, state) => DoctorsScreen(),
-              )
+                name: "Home",
+                path: Routes.homeScreen,
+                // builder: (context, state) => const HomeScreen(),
+                pageBuilder: (context, state) {
+                  return NoTransitionPage(child: HomeScreen());
+                },
+              ),
             ],
           ),
-          GoRoute(
-              name: "Lab",
-              path: Routes.labScreen,
+          StatefulShellBranch(routes: [
+            GoRoute(
+              name: "Consult",
+              path: Routes.consultScreen,
               pageBuilder: (context, state) {
-                return NoTransitionPage(child: LabScreen());
-              }),
-          GoRoute(
-              name: "Results",
-              path: Routes.resultsScreen,
-              pageBuilder: (context, state) {
-                return NoTransitionPage(child: ResultsScreen());
-              }),
-          GoRoute(
-              name: "Profile",
-              path: Routes.profileScreen,
-              pageBuilder: (context, state) {
-                return NoTransitionPage(child: ProfileScreen());
-                // return NoTransitionPage(child: NoteScreen());
-              }),
+                return NoTransitionPage(child: ConsultScreen());
+              },
+              routes: [
+                GoRoute(
+                  parentNavigatorKey: _rootNavigatorKey,
+                  path: Routes.doctorsScreen,
+                  builder: (context, state) => DoctorsScreen(),
+                )
+              ],
+            ),
+          ]),
+          StatefulShellBranch(routes: [
+            GoRoute(
+                name: "Lab",
+                path: Routes.labScreen,
+                pageBuilder: (context, state) {
+                  return NoTransitionPage(child: LabScreen());
+                }),
+          ]),
+          StatefulShellBranch(routes: [
+            GoRoute(
+                name: "Results",
+                path: Routes.resultsScreen,
+                pageBuilder: (context, state) {
+                  return NoTransitionPage(child: ResultsScreen());
+                }),
+          ]),
+          StatefulShellBranch(routes: [
+            GoRoute(
+                name: "Profile",
+                path: Routes.profileScreen,
+                pageBuilder: (context, state) {
+                  return NoTransitionPage(child: ProfileScreen());
+                  // return NoTransitionPage(child: NoteScreen());
+                }),
+          ])
         ],
       ),
       GoRoute(
