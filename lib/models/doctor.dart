@@ -3,16 +3,16 @@ import 'package:uuid/uuid.dart';
 const Uuid uuid = Uuid();
 
 class Doctor {
-  Doctor({
-    required this.id,
-    required this.userId,
-    required this.nameTitle,
-    required this.specialize,
-    required this.timeStart,
-    required this.timeEnd,
-    required this.dayStart,
-    required this.dayEnd,
-  });
+  Doctor(
+      {required this.id,
+      required this.userId,
+      required this.nameTitle,
+      required this.specialize,
+      required this.timeStart,
+      required this.timeEnd,
+      required this.dayStart,
+      required this.dayEnd,
+      required this.imageUrl});
 
   final String id;
   final String userId;
@@ -25,6 +25,7 @@ class Doctor {
 
   final String dayStart;
   final String dayEnd;
+  final String imageUrl;
 
   factory Doctor.fromMap(Map<String, dynamic> map) {
     // DateTime time_start = map["time_start"];
@@ -38,6 +39,7 @@ class Doctor {
       timeEnd: map["time_end"],
       dayStart: map["day_start"],
       dayEnd: map["day_end"],
+      imageUrl: map["image_url"],
     );
   }
   Map<String, dynamic> toMap() {
@@ -50,6 +52,7 @@ class Doctor {
       "time_end": timeEnd,
       "day_start": dayStart,
       "day_end": dayEnd,
+      "image_url": imageUrl,
     };
   }
 }

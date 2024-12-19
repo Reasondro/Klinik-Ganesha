@@ -271,3 +271,61 @@ class ExploreScreen extends StatelessWidget {
 //     );
 //   }
 // }
+
+
+
+
+
+// home
+    // if (feedsConsult.isEmpty) {
+          //   return Column(
+          //     mainAxisAlignment: MainAxisAlignment.center,
+          //     crossAxisAlignment: CrossAxisAlignment.center,
+          //     children: [
+          //       Image.asset(
+          //         'assets/images/no_appointment2.png',
+          //         width: 400,
+          //         fit: BoxFit.contain,
+          //       ),
+          //       Text(
+          //         "Kosong nih, jadwal Anda.\nYuk, buat janji sekarang!",
+          //         style: Theme.of(context)
+          //             .textTheme
+          //             .titleMedium
+          //             ?.copyWith(fontWeight: FontWeight.bold),
+          //         textAlign: TextAlign.center,
+          //       ),
+          //     ],
+          //   );
+          // }
+
+// SingleChildScrollView(
+//             child: Column(
+//                 crossAxisAlignment: CrossAxisAlignment.center,
+//                 children: [
+//                   Text(
+//                     "Janji minggu ini",
+//                     style: Theme.of(context).textTheme.titleMedium,
+//                   ),
+//                   // Expanded(lt.length,
+//                   //     itemBuilder: (conte
+//                   //   child: ListView.builder(
+//                   //     itemCount: feedsConsuxt, index) {
+//                   //       final feedConsult = feedsConsult[index];
+//                   //       return FeedConsultItem(
+//                   //         feedConsult: feedConsult,
+//                   //         onCancel: () {
+//                   //           cancelAppointment(feedConsult);
+//                   //         },
+//                   //       );
+//                   //     },
+//                   //   ),
+//                   // ),
+//                   for (FeedConsult fc in feedsConsult)
+//                     FeedConsultItem(
+//                         feedConsult: fc,
+//                         onCancel: () {
+//                           cancelAppointment(fc);
+//                         })
+//                 ]),
+//           );

@@ -53,6 +53,8 @@ class _DoctorsScreenState extends State<DoctorsScreen> {
                           final consultTime = doctor.timeStart;
                           final consultDay = doctor.dayStart;
                           final desc = "Medical checkup: ${doctor.specialize}";
+                          final imageUrl = doctor.imageUrl;
+
                           final newFeedConsult = FeedConsult(
                               userId: userId!,
                               category: category,
@@ -60,7 +62,9 @@ class _DoctorsScreenState extends State<DoctorsScreen> {
                               doctorName: doctorName,
                               desc: desc,
                               consultTime: consultTime,
-                              consultDay: consultDay);
+                              consultDay: consultDay,
+                              imageUrl: imageUrl);
+
                           makeAppointment(newFeedConsult);
                         },
                       );

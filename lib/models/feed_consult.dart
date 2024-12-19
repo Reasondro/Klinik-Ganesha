@@ -3,17 +3,18 @@ import 'package:uuid/uuid.dart';
 const Uuid uuid = Uuid();
 
 class FeedConsult {
-  FeedConsult({
-    String? id,
-    this.createdAt,
-    required this.userId,
-    required this.category,
-    required this.doctorId,
-    required this.doctorName,
-    required this.desc,
-    required this.consultTime,
-    required this.consultDay,
-  }) : id = id ?? uuid.v4();
+  FeedConsult(
+      {String? id,
+      this.createdAt,
+      required this.userId,
+      required this.category,
+      required this.doctorId,
+      required this.doctorName,
+      required this.desc,
+      required this.consultTime,
+      required this.consultDay,
+      required this.imageUrl})
+      : id = id ?? uuid.v4();
 
   final String id;
   final String? createdAt;
@@ -28,6 +29,8 @@ class FeedConsult {
   final String consultTime;
   final String consultDay;
 
+  final String imageUrl;
+
   factory FeedConsult.fromMap(Map<String, dynamic> map) {
     return FeedConsult(
       id: map["id"],
@@ -39,6 +42,7 @@ class FeedConsult {
       desc: map["desc"],
       consultTime: map["consult_time"],
       consultDay: map["consult_day"],
+      imageUrl: map["image_url"],
     );
   }
   Map<String, dynamic> toMap() {
@@ -51,6 +55,7 @@ class FeedConsult {
       "desc": desc,
       "consult_time": consultTime,
       "consult_day": consultDay,
+      "image_url": imageUrl,
     };
   }
 }

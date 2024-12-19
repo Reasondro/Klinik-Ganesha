@@ -35,8 +35,7 @@ class FeedConsultItem extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 24,
-                  backgroundImage:
-                      const AssetImage('assets/images/doctor_placeholder.png'),
+                  backgroundImage: NetworkImage(feedConsult.imageUrl),
                 ),
                 const SizedBox(width: 12),
                 Expanded(

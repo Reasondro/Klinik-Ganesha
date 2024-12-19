@@ -24,10 +24,10 @@ class LabScreen extends StatelessWidget {
               leading: const Icon(Icons.biotech),
               title: const Text('Tes Darah Lengkap'),
               subtitle: const Text('Rabu, 22 Des 2024 - 08:00 AM'),
-              trailing: ElevatedButton(
-                onPressed: () {},
-                child: const Text('Detail'),
-              ),
+              // trailing: ElevatedButton(
+              //   onPressed: () {},
+              //   child: const Text('Detail'),
+              // ),
             ),
           ),
           const SizedBox(height: 8),
@@ -39,10 +39,10 @@ class LabScreen extends StatelessWidget {
               leading: const Icon(Icons.biotech),
               title: const Text('Tes Urin Lengkap'),
               subtitle: const Text('Jumat, 24 Des 2024 - 09:00 AM'),
-              trailing: ElevatedButton(
-                onPressed: () {},
-                child: const Text('Detail'),
-              ),
+              // trailing: ElevatedButton(
+              //   onPressed: () {},
+              //   child: const Text('Detail'),
+              // ),
             ),
           ),
           const SizedBox(height: 16),
@@ -60,10 +60,10 @@ class LabScreen extends StatelessWidget {
               leading: const Icon(Icons.history),
               title: const Text('Tes Kolesterol'),
               subtitle: const Text('Selesai: 10 Des 2024 - 07:30 AM'),
-              trailing: ElevatedButton(
-                onPressed: () {},
-                child: const Text('Lihat Hasil'),
-              ),
+              // trailing: ElevatedButton(
+              //   onPressed: () {},
+              //   child: const Text('Lihat Hasil'),
+              // ),
             ),
           ),
           const SizedBox(height: 8),
@@ -75,12 +75,12 @@ class LabScreen extends StatelessWidget {
               leading: const Icon(Icons.history),
               title: const Text('Tes Gula Darah'),
               subtitle: const Text('Selesai: 05 Des 2024 - 07:30 AM'),
-              trailing: ElevatedButton(
-                onPressed: () {
-                  // Aksi untuk melihat hasil lab lama
-                },
-                child: const Text('Lihat Hasil'),
-              ),
+              // trailing: ElevatedButton(
+              //   onPressed: () {
+              //     // Aksi untuk melihat hasil lab lama
+              //   },
+              //   child: const Text('Lihat Hasil'),
+              // ),
             ),
           ),
           const SizedBox(height: 16),
