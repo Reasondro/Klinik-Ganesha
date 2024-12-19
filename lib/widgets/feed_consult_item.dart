@@ -24,7 +24,7 @@ class FeedConsultItem extends StatelessWidget {
             BoxShadow(
               color: Colors.black38,
               blurRadius: 6,
-              offset: const Offset(0, 4),
+              offset: const Offset(0, 1),
             ),
           ],
         ),
@@ -85,7 +85,7 @@ class FeedConsultItem extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 16),
+            // const SizedBox(height: 16),
             Row(
               children: [
                 Icon(Icons.calendar_month,

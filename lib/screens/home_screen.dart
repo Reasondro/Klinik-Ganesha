@@ -27,57 +27,49 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 0, right: 16.0, left: 16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Flexible(
-            child: StreamBuilder(
-              stream: feedsConsultDatabase.stream,
-              builder: (context, snapshot) {
-                if (!snapshot.hasData) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-                final List<FeedConsult> feedsConsult = snapshot.data!;
-                if (feedsConsult.isEmpty) {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        'assets/images/no_appointment2.png',
-                        width: 400,
-                        fit: BoxFit.contain,
-                      ),
-                      Text(
-                        "Kosong nih, jadwal Anda.\nYuk, buat janji sekarang!",
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium
-                            ?.copyWith(fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  );
-                }
-
-                return ListView.builder(
-                  itemCount: feedsConsult.length,
-                  itemBuilder: (context, index) {
-                    final feedConsult = feedsConsult[index];
-                    return FeedConsultItem(
-                      feedConsult: feedConsult,
-                      onCancel: () {
-                        cancelAppointment(feedConsult);
-                      },
-                    );
-                  },
-                );
-              },
-            ),
-          ),
-        ],
+      child: StreamBuilder(
+        stream: feedsConsultDatabase.stream,
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          final List<FeedConsult> feedsConsult = snapshot.data!;
+          if (feedsConsult.isEmpty) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image.asset(
+                  'assets/images/no_appointment2.png',
+                  width: 400,
+                  fit: BoxFit.contain,
+                ),
+                Text(
+                  "Kosong nih, jadwal Anda.\nYuk, buat janji sekarang!",
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleMedium
+                      ?.copyWith(fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            );
+          }
+          return ListView.builder(
+            itemCount: feedsConsult.length,
+            itemBuilder: (context, index) {
+              final feedConsult = feedsConsult[index];
+              return FeedConsultItem(
+                feedConsult: feedConsult,
+                onCancel: () {
+                  cancelAppointment(feedConsult);
+                },
+              );
+            },
+          );
+        },
       ),
     );
   }

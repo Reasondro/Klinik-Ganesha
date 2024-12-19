@@ -52,10 +52,31 @@ class _ConsultScreenState extends State<ConsultScreen> {
             ),
           ),
           const SizedBox(height: 16),
+          Row(
+            spacing: 10,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton.icon(
+                onPressed: () {
+                  context.push(Routes.nestedDoctorsScreen);
+                },
+                icon: const Icon(Icons.add),
+                label: const Text('Konsultasi Offline'),
+              ),
+              ElevatedButton.icon(
+                onPressed: () {
+                  // context.push(Routes.nestedDoctorsScreen);
+                },
+                icon: const Icon(Icons.add),
+                label: const Text('Konsultasi Online'),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
           Text(
             "Riwayat Konsultasi",
             style: Theme.of(context).textTheme.titleMedium,
-            textAlign: TextAlign.center,
+            textAlign: TextAlign.start,
           ),
           const SizedBox(height: 16),
           Card(
@@ -66,10 +87,10 @@ class _ConsultScreenState extends State<ConsultScreen> {
               leading: const Icon(Icons.history),
               title: const Text('Konsultasi Dengan Dr. Spesialis Saraf'),
               subtitle: const Text('Selesai: 10 Des 2024 - 14:00 PM'),
-              trailing: ElevatedButton(
-                onPressed: () {},
-                child: const Text('Laporan'),
-              ),
+              // trailing: ElevatedButton(
+              //   onPressed: () {},
+              //   child: const Text('Laporan'),
+              // ),
             ),
           ),
           const SizedBox(height: 8),
@@ -81,20 +102,10 @@ class _ConsultScreenState extends State<ConsultScreen> {
               leading: const Icon(Icons.history),
               title: const Text('Konsultasi Dengan Dr. Spesialis Kulit'),
               subtitle: const Text('Selesai: 5 Des 2024 - 11:00 AM'),
-              trailing: ElevatedButton(
-                onPressed: () {},
-                child: const Text('Laporan'),
-              ),
-            ),
-          ),
-          const SizedBox(height: 16),
-          Center(
-            child: ElevatedButton.icon(
-              onPressed: () async {
-                context.push(Routes.nestedDoctorsScreen);
-              },
-              icon: const Icon(Icons.add),
-              label: const Text('Buat Janji Konsultasi Baru'),
+              // trailing: ElevatedButton(
+              //   onPressed: () {},
+              //   child: const Text('Laporan'),
+              // ),
             ),
           ),
           const SizedBox(height: 16),
