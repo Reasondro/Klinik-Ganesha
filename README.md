@@ -2,8 +2,6 @@
 
 Klinik Ganesha adalah aplikasi digitalisasi layanan klinik yang membantu pasien dalam melakukan pendaftaran, membuat janji konsultasi, mengelola laporan hasil uji lab dan konsultasi, serta melihat jadwal mendatang dengan mudah.
 
-
-
 ## Fitur Utama
 Sementara ini, fitur yang diimplementasikan secara benar-benar (dinamis berdasarkan aksi user dan bukan data statis adalah fitur membuat janji konsultasi)
 1. **Registrasi Pasien**: Memungkinkan pengguna untuk mendaftar akun baru.
@@ -35,3 +33,16 @@ Sementara ini, fitur yang diimplementasikan secara benar-benar (dinamis berdasar
   ```bash
   flutter pub get
   flutter run
+
+## Cara Mengoperasikan
+1. **Registrasi Pasien**: Sign up dengan email dan password atau sign in jika sudah daftar sebelumnya pada layar registrasi (autentikasi)
+2. **Janji Konsultasi**: 
+   - Navigasi pada layar Consult dan scrool ke bawah untuk melihat tombol "Buat Janji Konsultasi Baru"
+   - Pilih salah satu dokter yang tersedia (sementara ini baru 2 akun yang terdaftar sebagai dokter) dengan mengklik tombol "Buat Janji". Perlu diperhatikan pada prototype ini, belum bisa memilih range hari yang available dari dokter tersebut, alhasil default value adalah hari dan jam tercepat dari range yang disediakan
+   - Jika berhasil (database dapat menyimpan data) maka Anda akan dinavigasikan ke layar utama (Home) dan melihat jadwal mendatang sesuai jadwal konsultasi yang anda pilih pada tahap sebelumnya
+   - Konten lainnya pada layar Lab dan Results masih statis, belum diimplementasikan fitur implementasi seperti proses bisnis membuat jadwal konsultasi. (Beserta tombol-tombol "Detail" yang akan sering ditemukan pada aplikasi juga belum diimplemntasikan --> Details Screen dari tiap Widget/Component)
+   - Anda bisa Sign Out jika ingin melalui layar Profile dan mengklik tombol "Sign Out"
+
+Made by Alessandro JH.
+
+P.S. : Prototype sudah berhasil mengimpelmentasi proses bisnis Registrasi Pasien dan Membuat Janji Konsultasi
