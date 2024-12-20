@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:klinik/auth/auth_service.dart';
 import 'package:klinik/database/doctors_database.dart';
 import 'package:klinik/models/feed_consult.dart';
+import 'package:klinik/router/routes.dart';
 
 import 'package:klinik/widgets/doctor_card.dart';
 import 'package:klinik/database/feeds_consult_database.dart';
+import 'package:klinik/utils/snack_bar_extension.dart';
 
 class DoctorsScreen extends StatefulWidget {
   const DoctorsScreen({super.key});
@@ -19,8 +21,17 @@ class _DoctorsScreenState extends State<DoctorsScreen> {
 
   final feedsConsultDatabase = FeedsConsultDatabase();
 
-  void makeAppointment(FeedConsult newFeedConsult) async {
-    feedsConsultDatabase.createFeedConsult(newFeedConsult);
+  void makeAppointment(FeedConsult newFeedConsult) {
+    try {
+      feedsConsultDatabase.createFeedConsult(newFeedConsult);
+      ScaffoldMessenger.of(context).clearSnackBars();
+      context.customShowSnackBar(
+          "Berhasil membuat janji dengan ${newFeedConsult.doctorName}");
+      context.go(Routes.homeScreen);
+    } catch (e) {
+      ScaffoldMessenger.of(context).clearSnackBars();
+      context.customShowErrorSnackBar("Error: $e");
+    }
   }
 
   @override

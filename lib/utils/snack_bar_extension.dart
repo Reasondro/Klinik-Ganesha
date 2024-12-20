@@ -22,13 +22,24 @@ extension ContextExtension on BuildContext {
     );
   }
 
-  // void customShowSnackBar(String message) {
-  //   ScaffoldMessenger.of(this).showSnackBar(
-  //     SnackBar(
-  //       content: Text(
-  //         message,
-  //       ),
-  //     ),
-  //   );
-  // }
+  void customShowSnackBar(String message) {
+    ScaffoldMessenger.of(this).showSnackBar(
+      SnackBar(
+        padding: EdgeInsets.only(bottom: 4, top: 14, left: 14, right: 14),
+        content: Text(
+          message,
+          style: TextStyle(
+              color: Theme.of(this).colorScheme.onPrimary, fontSize: 15),
+          textAlign: TextAlign.left,
+        ),
+        backgroundColor: Theme.of(this).colorScheme.primary,
+        dismissDirection: DismissDirection.horizontal,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(7),
+          ),
+        ),
+      ),
+    );
+  }
 }

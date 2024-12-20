@@ -4,6 +4,7 @@ import 'package:klinik/router/routing_service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 final ColorScheme klinikColorTheme = ColorScheme.fromSeed(
     seedColor: const Color.fromARGB(255, 5, 247, 162),
@@ -58,8 +59,8 @@ final ThemeData klinikTheme = ThemeData().copyWith(
 );
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await dotenv.load(fileName: ".env");
   await Supabase.initialize(
       anonKey: dotenv.env["SUPABASE_ANON_KEY"]!,
@@ -75,17 +76,33 @@ void main() async {
   ));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key, required this.router});
 
   final GoRouter router;
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    initialize();
+  }
+
+  void initialize() async {
+    await Future.delayed(const Duration(milliseconds: 650));
+    FlutterNativeSplash.remove();
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: "Klinik Ganesha",
       theme: klinikTheme,
-      routerConfig: router,
+      routerConfig: widget.router,
       debugShowCheckedModeBanner: false,
     );
   }
