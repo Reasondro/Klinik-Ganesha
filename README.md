@@ -40,8 +40,11 @@ Sementara ini, fitur yang diimplementasikan secara benar-benar (dinamis berdasar
    - Navigasi pada layar Consult dan scrool ke bawah untuk melihat tombol "Buat Janji Konsultasi Baru"
    - Pilih salah satu dokter yang tersedia (sementara ini baru 2 akun yang terdaftar sebagai dokter) dengan mengklik tombol "Buat Janji". Perlu diperhatikan pada prototype ini, belum bisa memilih range hari yang available dari dokter tersebut, alhasil default value adalah hari dan jam tercepat dari range yang disediakan
    - Jika berhasil (database dapat menyimpan data) maka Anda akan dinavigasikan ke layar utama (Home) dan melihat jadwal mendatang sesuai jadwal konsultasi yang anda pilih pada tahap sebelumnya
-   - Konten lainnya pada layar Lab dan Results masih statis, belum diimplementasikan fitur implementasi seperti proses bisnis membuat jadwal konsultasi. (Beserta tombol-tombol "Detail" yang akan sering ditemukan pada aplikasi juga belum diimplemntasikan --> Details Screen dari tiap Widget/Component)
-   - Anda bisa Sign Out jika ingin melalui layar Profile dan mengklik tombol "Sign Out"
+3. **Ganti akun/keluar**:
+   - Anda bisa Sign Out jika ingin mengganti akun atau sekedar keluar dari akun melalui layar Profile dan mengklik tombol "Sign Out"
+4. **Miscellaneous**:
+   - Konten lainnya pada layar Lab dan Results masih statis, belum diimplementasikan fitur implementasi seperti proses bisnis membuat jadwal konsultasi.
+   - Tombol-tombol "Detail" yang akan sering ditemukan pada aplikasi juga belum diimplemntasikan --> Details Screen dari tiap Widget/Component
 
 Made by Alessandro JH.
 
