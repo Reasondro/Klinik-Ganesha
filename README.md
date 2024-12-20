@@ -2,8 +2,10 @@
 
 Klinik Ganesha adalah aplikasi digitalisasi layanan klinik yang membantu pasien dalam melakukan pendaftaran, membuat janji konsultasi, mengelola laporan hasil uji lab dan konsultasi, serta melihat jadwal mendatang dengan mudah.
 
-## Fitur Utama
 
+
+## Fitur Utama
+Sementara ini, fitur yang diimplementasikan secara benar-benar (dinamis berdasarkan aksi user dan bukan data statis adalah fitur membuat janji konsultasi)
 1. **Registrasi Pasien**: Memungkinkan pengguna untuk mendaftar akun baru.
 2. **Janji Konsultasi**: 
    - Membuat janji konsultasi offline (online belum tersedia).
