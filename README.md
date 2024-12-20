@@ -1,16 +1,35 @@
-# klinik
+# Klinik Ganesha
 
-A new Flutter project.
+Klinik Ganesha adalah aplikasi digitalisasi layanan klinik yang membantu pasien dalam melakukan pendaftaran, membuat janji konsultasi, mengelola laporan hasil uji lab dan konsultasi, serta melihat jadwal mendatang dengan mudah.
 
-## Getting Started
+## Fitur Utama
 
-This project is a starting point for a Flutter application.
+1. **Registrasi Pasien**: Memungkinkan pengguna untuk mendaftar akun baru.
+2. **Janji Konsultasi**: 
+   - Membuat janji konsultasi offline (online belum tersedia).
+   - Menampilkan jadwal konsultasi yang sudah terjadwal.
+3. **Janji Pengujian Laboratorium**:
+   - Menampilkan data statis terkait jadwal uji lab.
+   - Fitur pembuatan janji uji lab akan segera hadir.
+4. **Laporan Hasil**:
+   - Menampilkan hasil laporan uji lab dan konsultasi secara statis untuk saat ini.
+5. **Jadwal Mendatang**:
+   - Menampilkan jadwal konsultasi dan kegiatan lainnya yang akan datang.
 
-A few resources to get you started if this is your first Flutter project:
+## Teknologi yang Digunakan
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- **Flutter**: Framework untuk pengembangan aplikasi mobile (front-end).
+- **Supabase**: Digunakan untuk mekanisme database, autentikasi, dan backend lainnya.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Cara Menggunakan
+
+### 1. Mengunduh dan Menginstal .apk
+- Anda dapat mengunduh file `.apk` melalui tautan yang disediakan (tautan akan segera ditambahkan).
+- Install file `.apk` pada perangkat Android Anda.
+
+### 2. Menjalankan di Emulator
+- Pastikan **Flutter** sudah terinstall di perangkat Anda.
+- Jalankan perintah berikut pada terminal:
+  ```bash
+  flutter pub get
+  flutter run
